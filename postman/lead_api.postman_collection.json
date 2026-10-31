@@ -1,0 +1,117 @@
+{
+  "info": {
+    "name": "HubSpot-style Mock - Lead API Checks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8765" },
+    { "key": "contactId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Create contact",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "pm.test('Status is 201', function () { pm.response.to.have.status(201); });",
+            "const body = pm.response.json();",
+            "pm.test('Response has id and email', function () {",
+            "  pm.expect(body).to.have.property('id');",
+            "  pm.expect(body.properties.email).to.include('@');",
+            "});",
+            "pm.collectionVariables.set('contactId', body.id);"
+          ]
+        }
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"properties\": {\"lead_id\": 777001, \"email\": \"postman.{{$timestamp}}@example.com\", \"firstname\": \"Post\", \"lastname\": \"Man\", \"company\": \"Acme Corp\", \"phone\": \"+919999999999\"}}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/crm/v3/objects/contacts",
+          "host": ["{{baseUrl}}"],
+          "path": ["crm", "v3", "objects", "contacts"]
+        }
+      }
+    },
+    {
+      "name": "List contacts",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Results is an array of at most 100', function () {",
+            "  const body = pm.response.json();",
+            "  pm.expect(body.results).to.be.an('array');",
+            "  pm.expect(body.results.length).to.be.at.most(100);",
+            "});",
+            "pm.test('Responds under 2000 ms', function () { pm.expect(pm.response.responseTime).to.be.below(2000); });"
+          ]
+        }
+      }],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/crm/v3/objects/contacts?limit=100",
+          "host": ["{{baseUrl}}"],
+          "path": ["crm", "v3", "objects", "contacts"],
+          "query": [{ "key": "limit", "value": "100" }]
+        }
+      }
+    },
+    {
+      "name": "Get contact by id",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Returned id matches the created contact', function () {",
+            "  pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('contactId'));",
+            "});"
+          ]
+        }
+      }],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/crm/v3/objects/contacts/{{contactId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["crm", "v3", "objects", "contacts", "{{contactId}}"]
+        }
+      }
+    },
+    {
+      "name": "Get unknown contact (expects 404)",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "pm.test('Status is 404', function () { pm.response.to.have.status(404); });",
+            "pm.test('Error body is returned', function () { pm.expect(pm.response.json().status).to.eql('error'); });"
+          ]
+        }
+      }],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/crm/v3/objects/contacts/99999999",
+          "host": ["{{baseUrl}}"],
+          "path": ["crm", "v3", "objects", "contacts", "99999999"]
+        }
+      }
+    }
+  ]
+}
