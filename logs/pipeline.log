@@ -8,3 +8,29 @@
 2026-10-31 17:47:23.609 | WARNING  | __main__:_quarantine_record:61 - Record 4 quarantined -> 20261031T121723_record4_0c013485.json
 2026-10-31 17:47:23.610 | INFO     | __main__:validate_payload_batch:89 - Batch complete: {'total': 5, 'clean': 3, 'quarantined': 2}
 2026-10-31 17:47:23.613 | SUCCESS  | __main__:<module>:120 - Clean data saved to C:\Users\KIIT0001\OneDrive\Desktop\api-pipeline-validator\storage\clean\clean_records.json
+2026-10-31 18:09:00.469 | INFO     | __main__:<module>:140 - === DEMO 1: healthy API ===
+2026-10-31 18:09:00.471 | INFO     | __main__:fetch_api_data:64 - Fetching data from http://127.0.0.1:64343/transactions
+2026-10-31 18:09:01.308 | SUCCESS  | __main__:fetch_api_data:77 - Fetched 5 records
+2026-10-31 18:09:01.308 | INFO     | validator:validate_payload_batch:67 - Starting validation of 5 records
+2026-10-31 18:09:01.309 | DEBUG    | validator:validate_payload_batch:75 - Record 0 is valid
+2026-10-31 18:09:01.309 | DEBUG    | validator:validate_payload_batch:75 - Record 1 is valid
+2026-10-31 18:09:01.310 | DEBUG    | validator:validate_payload_batch:75 - Record 2 is valid
+2026-10-31 18:09:01.310 | ERROR    | validator:validate_payload_batch:78 - Record 3 failed validation: 1 error(s)
+2026-10-31 18:09:01.312 | WARNING  | validator:_quarantine_record:61 - Record 3 quarantined -> 20261031T123901_record3_dbbfb695.json
+2026-10-31 18:09:01.313 | ERROR    | validator:validate_payload_batch:78 - Record 4 failed validation: 1 error(s)
+2026-10-31 18:09:01.316 | WARNING  | validator:_quarantine_record:61 - Record 4 quarantined -> 20261031T123901_record4_12703072.json
+2026-10-31 18:09:01.319 | INFO     | validator:validate_payload_batch:89 - Batch complete: {'total': 5, 'clean': 3, 'quarantined': 2}
+2026-10-31 18:09:01.321 | INFO     | __main__:<module>:144 - === DEMO 2: flaky API (2 failures, then success) ===
+2026-10-31 18:09:01.322 | INFO     | __main__:fetch_api_data:64 - Fetching data from http://127.0.0.1:64343/flaky
+2026-10-31 18:09:01.846 | WARNING  | __main__:_log_retry:36 - Attempt 1/4 failed (HTTPStatusError("Server error '503 Service Unavailable' for url 'http://127.0.0.1:64343/flaky'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503")). Retrying in 2s...
+2026-10-31 18:09:04.390 | WARNING  | __main__:_log_retry:36 - Attempt 2/4 failed (HTTPStatusError("Server error '503 Service Unavailable' for url 'http://127.0.0.1:64343/flaky'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503")). Retrying in 4s...
+2026-10-31 18:09:08.950 | SUCCESS  | __main__:fetch_api_data:77 - Fetched 5 records
+2026-10-31 18:09:08.951 | INFO     | validator:validate_payload_batch:67 - Starting validation of 5 records
+2026-10-31 18:09:08.951 | DEBUG    | validator:validate_payload_batch:75 - Record 0 is valid
+2026-10-31 18:09:08.951 | DEBUG    | validator:validate_payload_batch:75 - Record 1 is valid
+2026-10-31 18:09:08.951 | DEBUG    | validator:validate_payload_batch:75 - Record 2 is valid
+2026-10-31 18:09:08.951 | ERROR    | validator:validate_payload_batch:78 - Record 3 failed validation: 1 error(s)
+2026-10-31 18:09:08.953 | WARNING  | validator:_quarantine_record:61 - Record 3 quarantined -> 20261031T123908_record3_88704e8d.json
+2026-10-31 18:09:08.953 | ERROR    | validator:validate_payload_batch:78 - Record 4 failed validation: 1 error(s)
+2026-10-31 18:09:08.955 | WARNING  | validator:_quarantine_record:61 - Record 4 quarantined -> 20261031T123908_record4_eb6db173.json
+2026-10-31 18:09:08.955 | INFO     | validator:validate_payload_batch:89 - Batch complete: {'total': 5, 'clean': 3, 'quarantined': 2}
