@@ -1,29 +1,18 @@
-"""Central configuration for the pipeline validator."""
+"""Central settings."""
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+REPORT_DIR = BASE_DIR / "reports"
+LEADS_CSV = DATA_DIR / "leads_sheet.csv"
+DB_PATH = DATA_DIR / "sync_state.db"
 
-# Where data goes
-STORAGE_DIR = BASE_DIR / "storage"
-CLEAN_DIR = STORAGE_DIR / "clean"
-QUARANTINE_DIR = STORAGE_DIR / "quarantine"
+HOST = "127.0.0.1"
+PORT = 8765
+BASE_URL = f"http://{HOST}:{PORT}"
 
-# Logging
-LOG_DIR = BASE_DIR / "logs"
-LOG_LEVEL = "INFO"
+LEAD_COUNT = 520      # "500+" leads
+PAGE_SIZE = 100
 
-# Ingestion / retry settings
-REQUEST_TIMEOUT_SECONDS = 10
-RETRY_MAX_ATTEMPTS = 4          # total tries, including the first
-RETRY_WAIT_MULTIPLIER = 2       # waits: 2s, 4s, 8s ...
-RETRY_WAIT_MIN_SECONDS = 2
-RETRY_WAIT_MAX_SECONDS = 10     # never wait longer than this
-
-# Alerting
-ALERT_WEBHOOK_ENV_VAR = "NOTIFICATION_WEBHOOK_URL"
-ALERT_MIN_QUARANTINED = 0       # alert when quarantined count is greater than this
-ALERT_TIMEOUT_SECONDS = 10
-
-# Create folders automatically if they don't exist
-for folder in (CLEAN_DIR, QUARANTINE_DIR, LOG_DIR):
-    folder.mkdir(parents=True, exist_ok=True)
+for folder in (DATA_DIR, REPORT_DIR):
+    folder.mkdir(exist_ok=True)

@@ -1,4 +1,2 @@
-pydantic>=2.0
-httpx
-tenacity
-loguru
+requests
+pandas
