@@ -1,0 +1,31 @@
+[
+  {
+    "transaction_id": "TXN-0001",
+    "account_id": 1001,
+    "amount": 49.99,
+    "currency": "USD",
+    "timestamp": "2026-10-30T10:15:00Z",
+    "merchant_category": "retail",
+    "meta_data": {
+      "channel": "online"
+    }
+  },
+  {
+    "transaction_id": "TXN-0002",
+    "account_id": 1002,
+    "amount": 320.5,
+    "currency": "EUR",
+    "timestamp": "2026-10-30T11:20:00Z",
+    "merchant_category": "travel",
+    "meta_data": null
+  },
+  {
+    "transaction_id": "TXN-0003",
+    "account_id": 1003,
+    "amount": 15.0,
+    "currency": "INR",
+    "timestamp": "2026-10-30T12:05:00Z",
+    "merchant_category": "utilities",
+    "meta_data": null
+  }
+]

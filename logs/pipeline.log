@@ -1,0 +1,10 @@
+2026-10-31 17:47:23.599 | INFO     | __main__:validate_payload_batch:67 - Starting validation of 5 records
+2026-10-31 17:47:23.600 | DEBUG    | __main__:validate_payload_batch:75 - Record 0 is valid
+2026-10-31 17:47:23.600 | DEBUG    | __main__:validate_payload_batch:75 - Record 1 is valid
+2026-10-31 17:47:23.601 | DEBUG    | __main__:validate_payload_batch:75 - Record 2 is valid
+2026-10-31 17:47:23.601 | ERROR    | __main__:validate_payload_batch:78 - Record 3 failed validation: 1 error(s)
+2026-10-31 17:47:23.603 | WARNING  | __main__:_quarantine_record:61 - Record 3 quarantined -> 20261031T121723_record3_d2ed2bc3.json
+2026-10-31 17:47:23.604 | ERROR    | __main__:validate_payload_batch:78 - Record 4 failed validation: 1 error(s)
+2026-10-31 17:47:23.609 | WARNING  | __main__:_quarantine_record:61 - Record 4 quarantined -> 20261031T121723_record4_0c013485.json
+2026-10-31 17:47:23.610 | INFO     | __main__:validate_payload_batch:89 - Batch complete: {'total': 5, 'clean': 3, 'quarantined': 2}
+2026-10-31 17:47:23.613 | SUCCESS  | __main__:<module>:120 - Clean data saved to C:\Users\KIIT0001\OneDrive\Desktop\api-pipeline-validator\storage\clean\clean_records.json
