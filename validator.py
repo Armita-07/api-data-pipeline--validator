@@ -63,9 +63,10 @@ def _quarantine_record(raw_record: Any, error: ValidationError, index: int) -> N
 
 # ---------- Main engine ----------
 def validate_payload_batch(raw_records: list) -> dict:
-    """Validate a batch. Returns clean records plus a summary."""
+    """Validate a batch. Returns clean records, a summary, and error details."""
     logger.info(f"Starting validation of {len(raw_records)} records")
     clean_records: list = []
+    error_details: list = []
     quarantined_count = 0
 
     for index, raw in enumerate(raw_records):
@@ -78,6 +79,13 @@ def validate_payload_batch(raw_records: list) -> dict:
             logger.error(f"Record {index} failed validation: {err.error_count()} error(s)")
             _quarantine_record(raw, err, index)
 
+            # Keep a short, structured version of each error for the alert
+            for e in err.errors():
+                field = ".".join(str(part) for part in e["loc"]) or "record"
+                error_details.append(
+                    {"record_index": index, "field": field, "message": e["msg"]}
+                )
+
     result = {
         "clean_records": clean_records,
         "summary": {
@@ -85,10 +93,10 @@ def validate_payload_batch(raw_records: list) -> dict:
             "clean": len(clean_records),
             "quarantined": quarantined_count,
         },
+        "error_details": error_details,
     }
     logger.info(f"Batch complete: {result['summary']}")
     return result
-
 
 # ---------- Local test ----------
 if __name__ == "__main__":

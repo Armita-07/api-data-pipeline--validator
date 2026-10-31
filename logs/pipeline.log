@@ -34,3 +34,23 @@
 2026-10-31 18:09:08.953 | ERROR    | validator:validate_payload_batch:78 - Record 4 failed validation: 1 error(s)
 2026-10-31 18:09:08.955 | WARNING  | validator:_quarantine_record:61 - Record 4 quarantined -> 20261031T123908_record4_eb6db173.json
 2026-10-31 18:09:08.955 | INFO     | validator:validate_payload_batch:89 - Batch complete: {'total': 5, 'clean': 3, 'quarantined': 2}
+2026-10-31 18:18:48.513 | INFO     | __main__:run_full_pipeline:18 - ========== PIPELINE START ==========
+2026-10-31 18:18:48.514 | INFO     | ingestion:fetch_api_data:64 - Fetching data from http://127.0.0.1:64912/transactions
+2026-10-31 18:18:49.149 | SUCCESS  | ingestion:fetch_api_data:77 - Fetched 5 records
+2026-10-31 18:18:49.149 | INFO     | validator:validate_payload_batch:67 - Starting validation of 5 records
+2026-10-31 18:18:49.152 | DEBUG    | validator:validate_payload_batch:76 - Record 0 is valid
+2026-10-31 18:18:49.153 | DEBUG    | validator:validate_payload_batch:76 - Record 1 is valid
+2026-10-31 18:18:49.153 | DEBUG    | validator:validate_payload_batch:76 - Record 2 is valid
+2026-10-31 18:18:49.153 | ERROR    | validator:validate_payload_batch:79 - Record 3 failed validation: 1 error(s)
+2026-10-31 18:18:49.156 | WARNING  | validator:_quarantine_record:61 - Record 3 quarantined -> 20261031T124849_record3_d0ece92b.json
+2026-10-31 18:18:49.168 | ERROR    | validator:validate_payload_batch:79 - Record 4 failed validation: 1 error(s)
+2026-10-31 18:18:49.170 | WARNING  | validator:_quarantine_record:61 - Record 4 quarantined -> 20261031T124849_record4_8850680e.json
+2026-10-31 18:18:49.171 | INFO     | validator:validate_payload_batch:98 - Batch complete: {'total': 5, 'clean': 3, 'quarantined': 2}
+2026-10-31 18:18:49.173 | SUCCESS  | __main__:run_full_pipeline:34 - 3 clean records saved -> clean_records_20261031T124849.json
+2026-10-31 18:18:49.175 | WARNING  | alerting:_deliver:38 - NOTIFICATION_WEBHOOK_URL is not set. Alert logged locally instead:
+:rotating_light: *Data Pipeline Alert*
+Total: 5 | Clean: 3 | Quarantined: 2 | Error rate: 40.0%
+*Top validation errors:*
+• amount: Input should be greater than 0 (1x)
+• currency: String should match pattern '^[A-Z]{3}$' (1x)
+2026-10-31 18:18:49.176 | INFO     | __main__:run_full_pipeline:39 - ========== PIPELINE END: {'total': 5, 'clean': 3, 'quarantined': 2} ==========

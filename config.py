@@ -19,6 +19,11 @@ RETRY_WAIT_MULTIPLIER = 2       # waits: 2s, 4s, 8s ...
 RETRY_WAIT_MIN_SECONDS = 2
 RETRY_WAIT_MAX_SECONDS = 10     # never wait longer than this
 
+# Alerting
+ALERT_WEBHOOK_ENV_VAR = "NOTIFICATION_WEBHOOK_URL"
+ALERT_MIN_QUARANTINED = 0       # alert when quarantined count is greater than this
+ALERT_TIMEOUT_SECONDS = 10
+
 # Create folders automatically if they don't exist
 for folder in (CLEAN_DIR, QUARANTINE_DIR, LOG_DIR):
     folder.mkdir(parents=True, exist_ok=True)

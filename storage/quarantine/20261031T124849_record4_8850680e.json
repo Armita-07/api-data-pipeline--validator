@@ -1,0 +1,12 @@
+{
+  "quarantined_at": "2026-10-31T12:48:49.169236+00:00",
+  "validation_error": "1 validation error for TransactionRecord\ncurrency\n  String should match pattern '^[A-Z]{3}$' [type=string_pattern_mismatch, input_value='usd', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_pattern_mismatch",
+  "raw_payload": {
+    "transaction_id": "TXN-1005",
+    "account_id": 2005,
+    "amount": 75.0,
+    "currency": "usd",
+    "timestamp": "2026-10-31T10:45:00Z",
+    "merchant_category": "retail"
+  }
+}
